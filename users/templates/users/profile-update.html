@@ -1,0 +1,43 @@
+{% extends 'users/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <!-- Start: Parallax Background -->
+    <div data-bs-parallax-bg="true" style="height: 400px;background-image: url({{ user.profile.background_img.url }});background-position: center;background-size: cover; width: 100%;">
+    </div>
+    <!-- End: Parallax Background -->
+    
+    <!-- Start: Profile Update Form -->
+    <div class="container-fluid text-center" style="background-color: rgba(14,14,14,0);color: #010101;margin-top: -182px;">
+        <div class="row">
+            <div class="col-auto text-center m-auto" style="padding-top: 0;width: 100%;">
+                <div class="card text-center" style="background-color: rgba(255,255,255,0); border: 0px!important;">
+                    <div class="card-body text-center" style="background-color: rgba(255,255,255,0);width: 100%;">
+                        <img class="rounded-circle d-inline-flex justify-content-center align-items-center" style="background-size: contain;min-width: 100;min-height: 100;max-width: 300;max-height: 300;" src="{{ user.profile.profile_img.url }}" width="300" height="300" loading="lazy">
+                        <div class="row">
+                            <div class="col-7 text-center m-auto">
+                                <form method="POST" >
+                                    {% csrf_token %}
+                                    <div class="form-group text-left">
+                                        {{ u_form|crispy }}
+                                        {{ p_form|crispy }}
+                                    </div>
+                                    <button class="btn btn-primary" type="submit">Update Profile</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End: Profile Update Form -->
+{% endblock content %}

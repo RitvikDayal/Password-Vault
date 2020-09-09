@@ -1,0 +1,38 @@
+{% extends 'users/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{message}}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <!-- Start: Login Form Clean -->
+    <div class="login-clean" style="background-color: rgb(144,198,244);height: 100vh;">
+        <!-- Form Started -->
+        <form method="post">
+            {% csrf_token %}
+            
+            <h2 class="sr-only">Login Form</h2>
+            
+            <div class="illustration">
+                <i class="icon ion-ios-navigate"></i>
+            </div>
+
+                {{ form|crispy }}
+
+            <div class="form-group">
+                <button class="btn btn-primary btn-block" type="submit">Log In</button>
+            </div>
+
+            <a class="forgot" href="#">Forgot your email or password?</a>
+            <a class="forgot" href="#">Create a new account</a>
+        </form>
+        <!-- Form Ended -->
+    </div>
+    <!-- End: Login Form Clean -->
+    
+{% endblock content %}
